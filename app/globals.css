@@ -36,6 +36,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 button { cursor: pointer; }
 
 .brand-lockup { display: flex; align-items: center; gap: 14px; color: #111; text-decoration: none; }
+.restaurant-logo { width: 70px; height: 70px; object-fit: contain; border-radius: 8px; }
 .brand-stack { font-family: Impact, "Arial Black", sans-serif; font-size: 22px; font-weight: 950; line-height: .72; letter-spacing: 1px; transform: rotate(-2deg); }
 .brand-sub { border-left: 1px solid #999; padding-left: 14px; font-family: Georgia, serif; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; }
 .brand-taco { font-size: 32px; transform: rotate(-18deg); }
@@ -52,7 +53,7 @@ nav a:hover::after { right: 0; }
 
 .hero-section { position: relative; isolation: isolate; min-height: 520px; background: #141411; }
 .restaurant-storefront { position: absolute; inset: 0 0 0 30%; background-image: url('/images/restaurant-sign.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center; }
-.hero-shade { position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgb(5 5 5 / 90%) 0%, rgb(5 5 5 / 63%) 45%, rgb(5 5 5 / 8%) 78%); }
+.hero-shade { position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, #141411 0%, rgb(20 20 17 / 96%) 24%, rgb(20 20 17 / 55%) 40%, transparent 57%); }
 .brush-title, .brush-heading, .brush-sub { font-family: "Comic Sans MS", "Segoe Print", cursive; font-weight: 900; letter-spacing: -.055em; }
 .brush-title { text-shadow: 2px 3px 0 rgb(0 0 0 / 22%); transform: rotate(-1deg); }
 .brush-sub { color: var(--yellow); letter-spacing: .025em; }
@@ -70,6 +71,11 @@ nav a:hover::after { right: 0; }
 .category-tabs { display: grid; grid-template-columns: repeat(6, 1fr); gap: 7px; margin-bottom: 10px; }
 .category-tabs button { min-height: 44px; border: 1px solid white; border-radius: 3px; background: rgb(0 0 0 / 48%); color: white; font-size: 13px; font-weight: 800; text-transform: uppercase; }
 .category-tabs button.active { background: var(--green); }
+.category-tabs a { display: flex; align-items: center; justify-content: center; min-height: 44px; border: 1px solid white; border-radius: 3px; background: rgb(0 0 0 / 48%); color: white; font-size: 14px; font-weight: 800; text-transform: uppercase; text-decoration: none; padding: 10px; }
+.full-menu .menu-column { scroll-margin-top: 110px; border-bottom: 1px solid #d7cfc1; }
+.full-menu .menu-column:nth-child(odd) { border-left: 0; }
+.full-menu .menu-row h4 { flex-shrink: 1; }
+.full-menu .menu-row p { font-size: 16px; line-height: 1.5; }
 .menu-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-radius: 6px; background: #fffdf7; box-shadow: 0 15px 45px rgb(0 0 0 / 35%); }
 .menu-column { padding: 34px 38px 38px; }
 .menu-column + .menu-column { border-left: 1px solid #d7cfc1; }
@@ -127,7 +133,9 @@ nav a:hover::after { right: 0; }
 }
 
 @media (max-width: 600px) {
-  .hero-shade { background: linear-gradient(90deg, rgb(5 5 5 / 91%), rgb(5 5 5 / 58%)); }
+  .hero-shade { background: linear-gradient(0deg, #141411 0%, #141411 60%, transparent 76%); }
+  .restaurant-storefront { inset: 0 0 auto; height: 240px; background-size: cover; }
+  .hero-section > .relative { padding-top: 260px; }
   .benefit { flex-direction: column; }
   .menu-column { padding: 27px 22px; }
   .menu-row-title { align-items: flex-start; }
@@ -142,3 +150,18 @@ nav a:hover::after { right: 0; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: .01ms !important; }
 }
+
+header.sticky { border-top: 4px solid #078343; border-bottom: 1px solid #ded6c7; background: #fffdf7; }
+header .brand-stack { font-size: 26px; line-height: .88; letter-spacing: -.5px; }
+header .brand-sub { font-size: 12px; letter-spacing: .14em; max-width: 125px; line-height: 1.6; }
+header .brand-taco { display: none; }
+header nav { font-weight: 700; }
+header .language-button { border: 1px solid #ddd5c8; border-radius: 6px; padding: 10px 12px; }
+header .order-button { box-shadow: 0 3px 0 #96131c; white-space: nowrap; }
+.hero-section h1 { font-size: clamp(3rem, 5.3vw, 5.3rem); max-width: 570px; line-height: 1; }
+.hero-section .brush-sub { font-size: clamp(1.4rem, 2.5vw, 2.2rem); }
+@media (min-width: 1024px) {
+  .restaurant-storefront { inset: 0 0 0 40%; background-size: 100% auto; background-color: #141411; }
+  .hero-section .max-w-\[680px\] { max-width: 520px; }
+}
+@media (max-width: 900px) { .category-tabs a { flex: 0 0 auto; min-width: 135px; } }

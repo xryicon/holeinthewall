@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import QRCode from "qrcode";
 import {
   Clock3,
@@ -70,14 +70,13 @@ const copy = {
 export function HomePage() {
   const [language, setLanguage] = useState<Language>("en");
   const [menu, setMenu] = useState<MenuItem[]>(defaultMenu);
-  const [activeCategory, setActiveCategory] = useState("nachos");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [qrOpen, setQrOpen] = useState(false);
   const [qrSrc, setQrSrc] = useState("");
   const t = copy[language];
 
   useEffect(() => {
-    fetch("/api/menu")
+    fetch("/api/menu", { cache: "no-store" })
       .then((response) => (response.ok ? response.json() : null))
       .then((data) => data?.items?.length && setMenu(data.items))
       .catch(() => undefined);
@@ -92,18 +91,13 @@ export function HomePage() {
     }).then(setQrSrc);
   }, [qrOpen]);
 
-  const items = useMemo(
-    () => menu.filter((item) => item.category === activeCategory).sort((a, b) => a.order - b.order),
-    [menu, activeCategory],
-  );
-  const split = Math.ceil(items.length / 2);
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-[#f5f0e6] text-[#151515]">
       <header className="sticky top-0 z-50 bg-[#f7f3ea]/95 shadow-sm backdrop-blur">
         <div className="mx-auto flex h-[86px] max-w-[1380px] items-center justify-between px-5 lg:px-10">
           <a className="brand-lockup" href="#home" aria-label="Hole in the Wall home">
-            <span className="brand-stack">HOLE<br />IN THE<br />WALL</span>
+            <Image src="/images/restaurant-logo.jpg" alt="Hole in the Wall" width={70} height={70} priority className="restaurant-logo" />
             <span className="brand-sub">Mexican cuisine</span>
             <span className="brand-taco" aria-hidden="true">◒</span>
           </a>
@@ -163,22 +157,21 @@ export function HomePage() {
             <h2 className="brush-title text-6xl md:text-7xl">{t.ourMenu}</h2>
             <span className="menu-note">{t.menuNote}</span>
           </div>
-          <div className="category-tabs" role="tablist" aria-label="Menu categories">
+          <nav className="category-tabs" aria-label="Menu categories">
             {categories.map((category) => (
-              <button key={category.id} role="tab" aria-selected={activeCategory === category.id} className={activeCategory === category.id ? "active" : ""} onClick={() => setActiveCategory(category.id)}>
+              <a key={category.id} href={"#menu-" + category.id}>
                 {category[language]}
-              </button>
+              </a>
             ))}
-          </div>
-          <div className="menu-card">
-            <div className="menu-column">
-              <h3 className="brush-heading">{categories.find((c) => c.id === activeCategory)?.[language]}</h3>
-              {items.slice(0, split).map((item) => <MenuRow key={item.id} item={item} language={language} />)}
-            </div>
-            <div className="menu-column">
-              <h3 className="brush-heading hidden md:block">{language === "en" ? "Choose your filling" : "Elige tu relleno"}</h3>
-              {items.slice(split).map((item) => <MenuRow key={item.id} item={item} language={language} />)}
-            </div>
+          </nav>
+          <div className="menu-card full-menu">
+            {categories.map((category) => (
+              <section className="menu-column" id={"menu-" + category.id} key={category.id}>
+                <h3 className="brush-heading">{category[language]}</h3>
+                {menu.filter((item) => item.category === category.id).sort((a, b) => a.order - b.order)
+                  .map((item) => <MenuRow key={item.id} item={item} language={language} />)}
+              </section>
+            ))}
           </div>
           <div className="mt-7 flex justify-center">
             <button className="order-button" onClick={() => setQrOpen(true)}><QrCode size={19} />{t.qrTitle}</button>

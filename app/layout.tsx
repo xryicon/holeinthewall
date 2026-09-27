@@ -4,7 +4,11 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Hole in the Wall | Mexican Cuisine",
   description: "Fresh Mexican food, big flavour and good vibes. Explore our bilingual menu.",
-  icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
+  icons: {
+    icon: { url: "/images/restaurant-logo.jpg", type: "image/jpeg" },
+    shortcut: "/images/restaurant-logo.jpg",
+    apple: "/images/restaurant-logo.jpg",
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
