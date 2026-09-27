@@ -98,16 +98,7 @@ export function HomePage() {
 
 
   return (
-    <main className={"min-h-screen overflow-x-hidden bg-[#f5f0e6] text-[#151515] " + (language === "en" ? "exact-reference-header" : "")}>
-      {language === "en" && <section className="reference-header-copy" aria-label="Hole in the Wall Mexican cuisine">
-        <img src="/images/header-reference.png" alt="Hole in the Wall. Big Mexican flavour. Hidden in plain sight. Fresh ingredients. Authentic flavours. Great food, good vibes." width={558} height={296} />
-        <a className="reference-hotspot ref-brand" href="#home" aria-label="Hole in the Wall home" />
-        {t.nav.map((label, index) => <a key={label} className={"reference-hotspot ref-nav ref-nav-" + index} href={["#home","#menu","#about","#location","#contact"][index]} aria-label={label} />)}
-        <a className="reference-hotspot ref-order" href="tel:+35312345678" aria-label="Order or takeaway" />
-        <a className="reference-hotspot ref-view-menu" href="#menu" aria-label="View menu" />
-        <a className="reference-hotspot ref-find-us" href="#location" aria-label="Find us" />
-        <button className="reference-language" onClick={() => setLanguage("es")} aria-label="Ver en español">ES</button>
-      </section>}
+    <main className="min-h-screen overflow-x-hidden bg-[#f5f0e6] text-[#151515]">
       <header className="sticky top-0 z-50 bg-[#f7f3ea]/95 shadow-sm backdrop-blur">
         <div className="mx-auto flex h-[86px] max-w-[1380px] items-center justify-between px-5 lg:px-10">
           <a className="brand-lockup" href="#home" aria-label="Hole in the Wall home">

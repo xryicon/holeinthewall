@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import "./reference.css";
+import "./header-hd.css";
 
 export const metadata: Metadata = {
   title: "Hole in the Wall | Mexican Cuisine",
