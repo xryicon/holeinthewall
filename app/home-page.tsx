@@ -71,6 +71,7 @@ const copy = {
 
 export function HomePage() {
   const [language, setLanguage] = useState<Language>("en");
+  const [languageChosen, setLanguageChosen] = useState(false);
   const [menu, setMenu] = useState<MenuItem[]>(defaultMenu);
   const [activeCategory, setActiveCategory] = useState("nachos");
   const [fullMenu, setFullMenu] = useState(false);
@@ -81,6 +82,7 @@ export function HomePage() {
   const [qrSrc, setQrSrc] = useState("");
   const [bookingNotice, setBookingNotice] = useState(false);
   const t = copy[language];
+  useEffect(() => { document.documentElement.lang = language; }, [language]);
 
   useEffect(() => {
     fetch("/api/menu", { cache: "no-store" })
@@ -101,6 +103,21 @@ export function HomePage() {
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-[#f5f0e6] text-[#151515]">
+      {!languageChosen && <div className="language-welcome">
+        <Image src="/images/restaurant-header-hd.png" alt="" fill priority sizes="100vw" className="welcome-photo" />
+        <div className="welcome-panel">
+          <Image src="/images/restaurant-logo.jpg" alt="Hole in the Wall" width={112} height={112} className="welcome-logo" />
+          <p className="welcome-kicker">MEXICAN CUISINE · COCINA MEXICANA</p>
+          <h1>Bienvenidos.<br />Welcome.</h1>
+          <p>Elige tu idioma · Choose your language</p>
+          <div className="welcome-languages">
+            <button onClick={() => { setLanguage("es"); setLanguageChosen(true); }} lang="es">Español <span>Entrar</span></button>
+            <button onClick={() => { setLanguage("en"); setLanguageChosen(true); }} lang="en">English <span>Enter</span></button>
+          </div>
+          <p className="welcome-tagline">Small place. Big flavour.</p>
+        </div>
+      </div>}
+      <div hidden={!languageChosen}>
       <header className="sticky top-0 z-50 bg-[#f7f3ea]/95 shadow-sm backdrop-blur">
         <div className="mx-auto flex h-[86px] max-w-[1380px] items-center justify-between px-5 lg:px-10">
           <a className="brand-lockup" href="#home" aria-label="Hole in the Wall home">
@@ -114,9 +131,6 @@ export function HomePage() {
             ))}
           </nav>
           <div className="flex items-center gap-2">
-            <button className="language-button" onClick={() => setLanguage(language === "en" ? "es" : "en")} aria-label="Switch language">
-              <Languages size={17} /> {language === "en" ? "ES" : "EN"}
-            </button>
             <button className="order-button booking-button hidden sm:inline-flex" onClick={() => setBookingNotice(true)}><span aria-hidden="true">✦</span>{t.order}</button>
             <button className="mobile-toggle lg:hidden" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Open navigation">
               {mobileOpen ? <X /> : <MenuIcon />}
@@ -218,6 +232,7 @@ export function HomePage() {
           <div className="flex flex-col items-center gap-4 md:items-end"><div className="flex gap-4 text-xl font-black" aria-label="Social media"><span aria-label="Instagram">◎</span><span aria-label="Facebook">f</span></div><button className="order-button booking-button" onClick={() => setBookingNotice(true)}>{t.order}</button></div>
         </div>
         <div className="border-t border-white/10 px-6 py-4 text-center text-xs text-white/55">© 2026 Hole in the Wall · <Link href="/admin" className="hover:text-white">{t.admin}</Link></div>
+        <div className="footer-language"><button onClick={() => setLanguageChosen(false)}>Español / English</button></div>
       </footer>
       <Dialog open={bookingNotice} onOpenChange={setBookingNotice}>
         <DialogContent className="booking-notice">
@@ -228,6 +243,7 @@ export function HomePage() {
       </Dialog>
 
       {qrOpen && <div className="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="qr-title" onClick={() => setQrOpen(false)}><div className="qr-modal" onClick={(event) => event.stopPropagation()}><button className="modal-close" onClick={() => setQrOpen(false)} aria-label={t.close}><X /></button><h2 id="qr-title" className="brush-heading">{t.qrTitle}</h2><p>{t.qrText}</p>{qrSrc && <img src={qrSrc} alt="QR code for this menu" className="mx-auto mt-5 w-64" />}<button className="green-button mt-5" onClick={() => setQrOpen(false)}>{t.close}</button></div></div>}
+      </div>
     </main>
   );
 }

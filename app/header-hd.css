@@ -1,6 +1,21 @@
 @font-face { font-family: Kalam; font-style: normal; font-weight: 700; font-display: swap; src: url("/fonts/kalam-bold.ttf") format("truetype"); }
-.home-with-sombrero { display: inline-flex; align-items: center; gap: 7px; }
-.home-sombrero { display: inline-block; width: 28px; height: 32px; background: url("/images/mexican-feature-icons.png") no-repeat -47px 0 / 96px 32px; transform: rotate(-9deg); }
+.home-with-sombrero { display: inline-flex; align-items: center; position: relative; margin-right: 8px; }
+.home-sombrero { position: absolute; pointer-events: none; right: -14px; top: -22px; width: 34px; height: 38px; background: url("/images/mexican-feature-icons.png") no-repeat -55.8px 0 / 114px 38px; transform: rotate(28deg); transform-origin: center 70%; }
+.language-welcome { position: relative; display: grid; place-items: center; min-height: 100svh; padding: 28px 20px; isolation: isolate; background: #111b14; }
+.language-welcome .welcome-photo { object-fit: cover; opacity: .3; z-index: -2; }
+.language-welcome::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(125deg,#072b20bb,#12161255,#75151caa); }
+.welcome-panel { width: min(540px,100%); background: #faf6eb; border-top: 6px solid #138044; border-bottom: 6px solid #bb2631; border-radius: 8px; padding: 36px; text-align: center; box-shadow: 0 25px 90px #0006; }
+.welcome-logo { margin: 0 auto 20px; border-radius: 12px; }
+.welcome-kicker { font-family: Georgia,serif; font-size: 12px; letter-spacing: .1em; }
+.welcome-panel h1 { margin: 24px 0 14px; font-family: Kalam,cursive; font-size: clamp(42px,7vw,60px); line-height: 1.1; }
+.welcome-panel > p { color: #514d43; }
+.welcome-languages { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 28px; }
+.welcome-languages button { padding: 17px 14px; background: #087443; color: white; border: 2px solid #eac76a; border-radius: 5px; font-family: Kalam,cursive; font-size: 28px; box-shadow: 0 3px 0 #075a35; }
+.welcome-languages button:nth-child(2) { background: #b71f29; box-shadow: 0 3px 0 #851823; }
+.welcome-languages button span { display: block; font-family: Arial,sans-serif; font-size: 14px; }
+.welcome-panel .welcome-tagline { font-family: Kalam,cursive; margin-top: 26px; font-size: 18px; }
+.footer-language { text-align: center; padding: 0 20px 20px; }
+.footer-language button { color: #f5ead5; text-decoration: underline; font-size: 14px; background: none; border: 0; }
 .order-button.booking-button { background: #b71f29; border: 2px solid #e8b84e; color: #fffaf0; border-radius: 5px; box-shadow: 0 3px 0 #087443; font-family: Kalam,cursive; font-size: 19px; padding: 8px 22px; }
 .booking-button > span { color: #f2cb62; }
 .booking-notice { z-index: 100; background: #fffaf0; color: #171717; border: 2px solid #168149; }
