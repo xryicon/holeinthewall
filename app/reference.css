@@ -1,0 +1,52 @@
+/* Reference composition, preserving the restaurant's real content. */
+header.sticky { border-top: 0; background: #f7f4ed; }
+header.sticky > div { height: 90px; max-width: 1280px; }
+.restaurant-logo { width: 72px; height: 72px; }
+.reference-hero { min-height: 460px; overflow: hidden; }
+.reference-hero .full-width-storefront { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.reference-hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg,#101310ef 0%,#101310dc 30%,#10131044 49%,transparent 66%); }
+.reference-hero .hero-intro { min-height: 460px; padding: 48px 5%; }
+.reference-hero .hero-intro > div { width: 44%; max-width: 540px; }
+.reference-hero h1 { font-family: "Segoe Print","Comic Sans MS",cursive; font-style: italic; font-size: clamp(2.5rem,4.6vw,4.8rem); line-height: 1.08; letter-spacing: -.06em; }
+.reference-hero .brush-sub { font-size: clamp(1.4rem,2.3vw,2.3rem); font-style: italic; }
+.reference-hero .eyebrow-sparks { display: none; }
+.paper-strip { background-image: none; }
+.benefit { flex-direction: column; gap: 10px; font-size: 14px; }
+.paper-strip > .grid { padding-top: 24px; padding-bottom: 24px; }
+.menu-section { min-height: 0; }
+.menu-section > .relative { max-width: 1120px; padding-top: 38px; padding-bottom: 38px; }
+.menu-section h2 { font-size: 58px; text-transform: uppercase; font-style: italic; }
+.reference-tabs[data-slot="tabs-list"] { display: grid; grid-template-columns: repeat(6,minmax(0,1fr)); width: 100%; height: auto; padding: 0; gap: 7px; background: transparent; margin-bottom: 4px; }
+.reference-tabs [data-slot="tabs-trigger"] { min-height: 42px; border: 1px solid #b3b1a9; border-radius: 3px; background: #161817c9; color: white; font-size: 14px; text-transform: uppercase; }
+.reference-tabs [data-slot="tabs-trigger"][data-state="active"] { background: #087d43; color: white; }
+.reference-menu-card { background: #f9f6ef; border-radius: 5px; padding: 28px 30px 20px; }
+.reference-menu-columns { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); }
+.reference-menu-card .category-section { padding: 0 24px; background: none; border: 0; border-radius: 0; box-shadow: none; }
+.reference-menu-card .category-section:nth-child(even) { border-left: 1px solid #d6d0c5; }
+.reference-menu-card .category-section:nth-child(n+3) { margin-top: 32px; }
+.reference-menu-card .brush-heading { font-size: 32px; font-style: italic; margin-bottom: 18px; }
+.reference-menu-card .category-dishes { display: block; }
+.reference-menu-card .menu-row { margin-bottom: 14px; }
+.reference-menu-card .menu-row h4 { font-size: 14px; font-weight: 500; }
+.reference-menu-card .menu-row p { font-size: 14px; line-height: 1.35; }
+.menu-full-action { display: flex; justify-content: center; padding-top: 8px; }
+.menu-section .mt-7 { margin-top: 14px; }
+#about > div { max-width: none; gap: 10px; padding: 8px 0; }
+#about .min-h-\[360px\] { min-height: 310px; }
+.about-panel { min-height: 310px; padding: 30px; }
+.about-panel .brush-heading { font-size: 28px; }
+.about-panel p { font-size: 16px; line-height: 1.5; }
+.info-panel { min-height: 310px; padding: 30px; gap: 22px; }
+.site-footer > .grid { padding-top: 30px; padding-bottom: 30px; }
+@media(max-width: 767px) {
+  .reference-hero .hero-intro { min-height: 520px; padding: 36px 24px; align-items: flex-end; }
+  .reference-hero .hero-intro > div { width: 100%; max-width: 480px; }
+  .reference-hero::after { background: linear-gradient(0deg,#101310f5 0%,#101310dd 45%,transparent 90%); }
+  .reference-hero .full-width-storefront { object-position: 58% top; }
+  .reference-tabs[data-slot="tabs-list"] { grid-template-columns: repeat(3,minmax(0,1fr)); }
+  .reference-menu-card { padding: 24px 20px; }
+  .reference-menu-columns { grid-template-columns: 1fr; }
+  .reference-menu-card .category-section { padding: 0; }
+  .reference-menu-card .category-section:nth-child(even) { border-left: 0; margin-top: 28px; }
+  .menu-section h2 { font-size: 44px; }
+}

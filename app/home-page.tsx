@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import QRCode from "qrcode";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Clock3,
   Languages,
@@ -70,6 +71,10 @@ const copy = {
 export function HomePage() {
   const [language, setLanguage] = useState<Language>("en");
   const [menu, setMenu] = useState<MenuItem[]>(defaultMenu);
+  const [activeCategory, setActiveCategory] = useState("nachos");
+  const [fullMenu, setFullMenu] = useState(false);
+  const pairStart = Math.floor(categories.findIndex((c) => c.id === activeCategory) / 2) * 2;
+  const visibleCategories = fullMenu ? categories : categories.slice(pairStart, pairStart + 2);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [qrOpen, setQrOpen] = useState(false);
   const [qrSrc, setQrSrc] = useState("");
@@ -124,7 +129,7 @@ export function HomePage() {
         )}
       </header>
 
-      <section id="home" className="hero-section wide-photo-hero">
+      <section id="home" className="hero-section reference-hero">
         <Image src="/images/restaurant-header-hd.png" alt="Enhanced photograph of the Hole in the Wall restaurant sign" width={2172} height={724} priority sizes="100vw" className="full-width-storefront" />
         <div className="hero-intro relative z-10 mx-auto flex max-w-[1380px] items-center px-6 py-10 lg:px-16">
           <div className="max-w-[680px] text-white">
@@ -156,15 +161,17 @@ export function HomePage() {
             <h2 className="brush-title text-6xl md:text-7xl">{t.ourMenu}</h2>
             <span className="menu-note">{t.menuNote}</span>
           </div>
-          <nav className="category-tabs" aria-label="Menu categories">
+          <Tabs value={activeCategory} onValueChange={(value) => { setActiveCategory(value); setFullMenu(false); }}>
+          <TabsList className="reference-tabs" aria-label="Menu categories">
             {categories.map((category) => (
-              <a key={category.id} href={"#menu-" + category.id}>
+              <TabsTrigger key={category.id} value={category.id}>
                 {category[language]}
-              </a>
+              </TabsTrigger>
             ))}
-          </nav>
-          <div className="separate-menu-sections">
-            {categories.map((category) => (
+          </TabsList>
+          <div className="reference-menu-card">
+            <div className="reference-menu-columns">
+            {visibleCategories.map((category) => (
               <section className="category-section" id={"menu-" + category.id} key={category.id}>
                 <h3 className="brush-heading">{category[language]}</h3>
                 <div className="category-dishes">{menu.filter((item) => item.category === category.id).sort((a, b) => a.order - b.order)
@@ -172,7 +179,10 @@ export function HomePage() {
                 </div>
               </section>
             ))}
+            </div>
+            <div className="menu-full-action"><button className="order-button" onClick={() => setFullMenu(!fullMenu)}>{language === "en" ? (fullMenu ? "Show less" : "View full menu") : (fullMenu ? "Ver menos" : "Ver menú completo")}</button></div>
           </div>
+          </Tabs>
           <div className="mt-7 flex justify-center">
             <button className="order-button" onClick={() => setQrOpen(true)}><QrCode size={19} />{t.qrTitle}</button>
           </div>
