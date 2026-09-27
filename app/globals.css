@@ -37,6 +37,20 @@ button { cursor: pointer; }
 
 .brand-lockup { display: flex; align-items: center; gap: 14px; color: #111; text-decoration: none; }
 .restaurant-logo { width: 70px; height: 70px; object-fit: contain; border-radius: 8px; }
+.full-width-storefront { display: block; width: 100%; height: auto; }
+.wide-photo-hero > .hero-intro { padding-top: 32px; padding-bottom: 36px; }
+.wide-photo-hero .hero-intro > div { max-width: none; width: 100%; text-align: center; }
+.wide-photo-hero h1 { max-width: none; font-size: clamp(2rem, 4vw, 4rem); }
+.wide-photo-hero .eyebrow-sparks { display: none; }
+.wide-photo-hero .hero-intro p { margin-left: auto; margin-right: auto; }
+.wide-photo-hero .hero-intro .flex { justify-content: center; }
+.separate-menu-sections { display: grid; gap: 32px; margin-top: 24px; }
+.category-section { padding: 32px; background: #fffdf7; border-radius: 8px; border-top: 5px solid #078343; box-shadow: 0 12px 30px #0005; scroll-margin-top: 112px; }
+.category-section:nth-child(even) { border-top-color: #c51e29; }
+.category-dishes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 40px; }
+.category-dishes .menu-row h4 { flex-shrink: 1; }
+.category-dishes .menu-row p { font-size: 16px; line-height: 1.5; }
+@media (max-width: 700px) { .category-dishes { grid-template-columns: 1fr; } .category-section { padding: 24px 20px; } }
 .brand-stack { font-family: Impact, "Arial Black", sans-serif; font-size: 22px; font-weight: 950; line-height: .72; letter-spacing: 1px; transform: rotate(-2deg); }
 .brand-sub { border-left: 1px solid #999; padding-left: 14px; font-family: Georgia, serif; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; }
 .brand-taco { font-size: 32px; transform: rotate(-18deg); }

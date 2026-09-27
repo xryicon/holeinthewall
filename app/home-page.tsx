@@ -124,10 +124,9 @@ export function HomePage() {
         )}
       </header>
 
-      <section id="home" className="hero-section">
-        <div className="restaurant-storefront" role="img" aria-label="Hole in the Wall restaurant storefront from the supplied photograph" />
-        <div className="hero-shade" />
-        <div className="relative z-10 mx-auto flex min-h-[520px] max-w-[1380px] items-center px-6 py-20 lg:px-16">
+      <section id="home" className="hero-section wide-photo-hero">
+        <Image src="/images/restaurant-header-hd.png" alt="Enhanced photograph of the Hole in the Wall restaurant sign" width={2172} height={724} priority sizes="100vw" className="full-width-storefront" />
+        <div className="hero-intro relative z-10 mx-auto flex max-w-[1380px] items-center px-6 py-10 lg:px-16">
           <div className="max-w-[680px] text-white">
             <div className="eyebrow-sparks" aria-hidden="true">✦</div>
             <h1 className="brush-title text-[clamp(3rem,6.8vw,6.8rem)] leading-[.87]">{t.headline}</h1>
@@ -164,12 +163,13 @@ export function HomePage() {
               </a>
             ))}
           </nav>
-          <div className="menu-card full-menu">
+          <div className="separate-menu-sections">
             {categories.map((category) => (
-              <section className="menu-column" id={"menu-" + category.id} key={category.id}>
+              <section className="category-section" id={"menu-" + category.id} key={category.id}>
                 <h3 className="brush-heading">{category[language]}</h3>
-                {menu.filter((item) => item.category === category.id).sort((a, b) => a.order - b.order)
+                <div className="category-dishes">{menu.filter((item) => item.category === category.id).sort((a, b) => a.order - b.order)
                   .map((item) => <MenuRow key={item.id} item={item} language={language} />)}
+                </div>
               </section>
             ))}
           </div>
