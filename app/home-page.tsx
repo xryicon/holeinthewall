@@ -205,8 +205,8 @@ export function HomePage() {
           </div>
           <div id="location" className="info-panel">
             <Info icon={<MapPin />} title={t.location}><p>Hole in the Wall<br /><a href="https://www.bing.com/maps?q=Plaza%20Nueva%203%2C%20Albox%2C%20Spain%2C%2004800" target="_blank" rel="noopener noreferrer">Plaza Nueva 3<br />Albox, Spain, 04800</a></p></Info>
-            <Info icon={<Clock3 />} title={t.hours}><p>Mon – Sat&nbsp;&nbsp; 11:00 – 22:00<br />Sunday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 12:00 – 21:00</p></Info>
-            <Info icon={<Phone />} title={t.contact}><p>+353 1 234 5678<br />hello@holeinthewall.ie</p></Info>
+            <Info icon={<Clock3 />} title={t.hours}><div className="min-h-6" /></Info>
+            <Info icon={<Phone />} title={t.contact}><div className="min-h-6" /></Info>
           </div>
         </div>
       </section>
