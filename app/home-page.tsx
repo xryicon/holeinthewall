@@ -147,8 +147,8 @@ export function HomePage() {
 
       <section className="paper-strip" aria-label="Our values">
         <div className="mx-auto grid max-w-[1200px] grid-cols-2 gap-7 px-6 py-8 md:grid-cols-4">
-          {[UtensilsCrossed, Sparkles, Clock3, Languages].map((Icon, index) => (
-            <div className="benefit" key={t.benefits[index]}><Icon /><span>{t.benefits[index]}</span></div>
+          {t.benefits.map((label, index) => (
+            <div className={"benefit mexican-benefit mexican-benefit-" + index} key={label}><span className={"mexican-feature-icon mexican-feature-icon-" + index} aria-hidden="true" /><span>{label}</span></div>
           ))}
         </div>
       </section>
