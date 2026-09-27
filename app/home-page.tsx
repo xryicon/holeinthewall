@@ -131,7 +131,7 @@ export function HomePage() {
       </header>
 
       <section id="home" className="hero-section">
-        <Image src="/images/hero-street-kitchen.png" alt="Colourful Mexican street kitchen" fill priority sizes="100vw" className="object-cover" />
+        <div className="restaurant-storefront" role="img" aria-label="Hole in the Wall restaurant storefront from the supplied photograph" />
         <div className="hero-shade" />
         <div className="relative z-10 mx-auto flex min-h-[520px] max-w-[1380px] items-center px-6 py-20 lg:px-16">
           <div className="max-w-[680px] text-white">

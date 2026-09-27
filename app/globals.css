@@ -50,7 +50,8 @@ nav a:hover::after { right: 0; }
 .order-button:hover, .green-button:hover, .outline-button:hover { filter: brightness(1.08); transform: translateY(-2px); }
 .mobile-nav { display: flex; flex-direction: column; gap: 20px; border-top: 1px solid #ded7ca; padding: 22px; background: #f7f3ea; }
 
-.hero-section { position: relative; isolation: isolate; min-height: 520px; }
+.hero-section { position: relative; isolation: isolate; min-height: 520px; background: #141411; }
+.restaurant-storefront { position: absolute; inset: 0 0 0 39%; background-image: url('/images/restaurant-reference.jpg'); background-repeat: no-repeat; background-size: auto 450%; background-position: right 6.8%; }
 .hero-shade { position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgb(5 5 5 / 90%) 0%, rgb(5 5 5 / 63%) 45%, rgb(5 5 5 / 8%) 78%); }
 .brush-title, .brush-heading, .brush-sub { font-family: "Comic Sans MS", "Segoe Print", cursive; font-weight: 900; letter-spacing: -.055em; }
 .brush-title { text-shadow: 2px 3px 0 rgb(0 0 0 / 22%); transform: rotate(-1deg); }
