@@ -154,7 +154,7 @@ export function HomePage() {
       </section>
 
       <section id="menu" className="menu-section">
-        <Image src="/images/menu-spread.png" alt="Nachos and quesadillas" fill sizes="100vw" className="object-cover" />
+        <div className="fixed-menu-backdrop" aria-hidden="true" />
         <div className="menu-overlay" />
         <div className="relative z-10 mx-auto max-w-[1180px] px-4 py-20 sm:px-7">
           <div className="relative mb-8 text-center text-white">

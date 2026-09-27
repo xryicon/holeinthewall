@@ -1,4 +1,5 @@
 @font-face { font-family: Kalam; font-style: normal; font-weight: 700; font-display: swap; src: url("/fonts/kalam-bold.ttf") format("truetype"); }
+.fixed-menu-backdrop { position: absolute; inset: 0; background-color: #171a18; background-image: url("/images/menu-spread.png"); background-position: center top; background-size: max(100vw, 1200px) auto; background-repeat: repeat-y; pointer-events: none; }
 header.sticky { background: #f8f5ed; border: 0; }
 header.sticky > div { max-width: 1440px; height: 98px; padding-inline: 4%; }
 header .brand-sub { max-width: none; border: 0; font-family: Georgia,serif; font-size: 14px; letter-spacing: .03em; padding-left: 0; }
