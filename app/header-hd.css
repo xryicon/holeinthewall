@@ -16,6 +16,9 @@
 .welcome-panel .welcome-tagline { font-family: Kalam,cursive; margin-top: 26px; font-size: 18px; }
 .footer-language { text-align: center; padding: 0 20px 20px; }
 .footer-language button { color: #f5ead5; text-decoration: underline; font-size: 14px; background: none; border: 0; }
+.facebook-link { display: inline-flex; width: 42px; height: 42px; align-items: center; justify-content: center; border: 1px solid #eee6; border-radius: 50%; color: white; text-decoration: none; }
+.facebook-link:hover { background: #087443; }
+.info-row a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
 .order-button.booking-button { background: #b71f29; border: 2px solid #e8b84e; color: #fffaf0; border-radius: 5px; box-shadow: 0 3px 0 #087443; font-family: Kalam,cursive; font-size: 19px; padding: 8px 22px; }
 .booking-button > span { color: #f2cb62; }
 .booking-notice { z-index: 100; background: #fffaf0; color: #171717; border: 2px solid #168149; }

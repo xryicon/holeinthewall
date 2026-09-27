@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import QRCode from "qrcode";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
@@ -78,8 +77,6 @@ export function HomePage() {
   const pairStart = Math.floor(categories.findIndex((c) => c.id === activeCategory) / 2) * 2;
   const visibleCategories = fullMenu ? categories : categories.slice(pairStart, pairStart + 2);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [qrOpen, setQrOpen] = useState(false);
-  const [qrSrc, setQrSrc] = useState("");
   const [bookingNotice, setBookingNotice] = useState(false);
   const t = copy[language];
   useEffect(() => { document.documentElement.lang = language; }, [language]);
@@ -91,14 +88,6 @@ export function HomePage() {
       .catch(() => undefined);
   }, []);
 
-  useEffect(() => {
-    if (!qrOpen) return;
-    QRCode.toDataURL(window.location.origin, {
-      width: 320,
-      margin: 2,
-      color: { dark: "#111111", light: "#fffdf7" },
-    }).then(setQrSrc);
-  }, [qrOpen]);
 
 
   return (
@@ -199,9 +188,6 @@ export function HomePage() {
             <div className="menu-full-action"><button className="order-button" onClick={() => setFullMenu(!fullMenu)}>{language === "en" ? (fullMenu ? "Show less" : "View full menu") : (fullMenu ? "Ver menos" : "Ver menú completo")}</button></div>
           </div>
           </Tabs>
-          <div className="mt-7 flex justify-center">
-            <button className="order-button" onClick={() => setQrOpen(true)}><QrCode size={19} />{t.qrTitle}</button>
-          </div>
         </div>
       </section>
 
@@ -218,7 +204,7 @@ export function HomePage() {
             <a className="outline-button mt-7 self-start" href="#home">{t.story}</a>
           </div>
           <div id="location" className="info-panel">
-            <Info icon={<MapPin />} title={t.location}><p>Hole in the Wall<br />18 Market Lane<br />Dublin 2, Ireland</p></Info>
+            <Info icon={<MapPin />} title={t.location}><p>Hole in the Wall<br /><a href="https://www.bing.com/maps?q=Plaza%20Nueva%203%2C%20Albox%2C%20Spain%2C%2004800" target="_blank" rel="noopener noreferrer">Plaza Nueva 3<br />Albox, Spain, 04800</a></p></Info>
             <Info icon={<Clock3 />} title={t.hours}><p>Mon – Sat&nbsp;&nbsp; 11:00 – 22:00<br />Sunday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 12:00 – 21:00</p></Info>
             <Info icon={<Phone />} title={t.contact}><p>+353 1 234 5678<br />hello@holeinthewall.ie</p></Info>
           </div>
@@ -229,7 +215,7 @@ export function HomePage() {
         <div className="mx-auto grid max-w-[1200px] items-center gap-8 px-6 py-10 md:grid-cols-[1fr_2fr_1fr]">
           <div className="brand-stack text-white">HOLE<br />IN THE<br />WALL</div>
           <div className="text-center"><p className="brush-sub text-2xl text-white">Good food brings people together</p><div className="footer-links">{t.nav.map((label, index) => <a key={label} href={["#home", "#menu", "#about", "#location", "#contact"][index]}>{label}</a>)}</div></div>
-          <div className="flex flex-col items-center gap-4 md:items-end"><div className="flex gap-4 text-xl font-black" aria-label="Social media"><span aria-label="Instagram">◎</span><span aria-label="Facebook">f</span></div><button className="order-button booking-button" onClick={() => setBookingNotice(true)}>{t.order}</button></div>
+          <div className="flex flex-col items-center gap-4 md:items-end"><div className="flex gap-4 text-xl font-black" aria-label="Social media"><a href="https://www.facebook.com/Holeinthewall1999" target="_blank" rel="noopener noreferrer" aria-label="Hole in the Wall on Facebook" className="facebook-link">f</a></div><button className="order-button booking-button" onClick={() => setBookingNotice(true)}>{t.order}</button></div>
         </div>
         <div className="border-t border-white/10 px-6 py-4 text-center text-xs text-white/55">© 2026 Hole in the Wall · <Link href="/admin" className="hover:text-white">{t.admin}</Link></div>
         <div className="footer-language"><button onClick={() => setLanguageChosen(false)}>Español / English</button></div>
@@ -242,7 +228,6 @@ export function HomePage() {
         </DialogContent>
       </Dialog>
 
-      {qrOpen && <div className="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="qr-title" onClick={() => setQrOpen(false)}><div className="qr-modal" onClick={(event) => event.stopPropagation()}><button className="modal-close" onClick={() => setQrOpen(false)} aria-label={t.close}><X /></button><h2 id="qr-title" className="brush-heading">{t.qrTitle}</h2><p>{t.qrText}</p>{qrSrc && <img src={qrSrc} alt="QR code for this menu" className="mx-auto mt-5 w-64" />}<button className="green-button mt-5" onClick={() => setQrOpen(false)}>{t.close}</button></div></div>}
       </div>
     </main>
   );
