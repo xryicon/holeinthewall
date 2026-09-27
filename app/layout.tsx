@@ -1,0 +1,12 @@
+import type { Metadata } from "next";
+import "./globals.css";
+
+export const metadata: Metadata = {
+  title: "Hole in the Wall | Mexican Cuisine",
+  description: "Fresh Mexican food, big flavour and good vibes. Explore our bilingual menu.",
+  icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
+};
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  return <html lang="en"><body>{children}</body></html>;
+}
