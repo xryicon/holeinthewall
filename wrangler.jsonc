@@ -1,0 +1,14 @@
+{
+  "name": "holeinthewall",
+  "account_id": "a988b6006f17aa57ffaf65fdcba1fc2c",
+  "main": "vinext/server/fetch-handler",
+  "compatibility_date": "2026-09-27",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {"enabled": true, "traces": {"enabled": true}},
+  "d1_databases": [{
+    "binding": "DB",
+    "database_name": "holeinthewall-menu",
+    "database_id": "3467927d-6385-40de-8b85-c43aafafbb55",
+    "migrations_dir": "drizzle"
+  }]
+}

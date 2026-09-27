@@ -17,7 +17,6 @@ export default async function AdminPage() {
           </div>
           <div className="admin-actions">
             <Link className="outline-button !bg-[#151515]" href="/">View website</Link>
-            <a className="outline-button !border-[#151515] !bg-transparent !text-[#151515]" href="/signout-with-chatgpt?return_to=/">Sign out</a>
           </div>
         </header>
         <AdminEditor />

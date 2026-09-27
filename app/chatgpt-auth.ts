@@ -1,5 +1,6 @@
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { isOwner } from "@/lib/owner-auth";
 
 export type ChatGPTUser = {
   userId: string;
@@ -20,6 +21,11 @@ const CALLBACK_PATH = "/callback";
 
 export async function getChatGPTUser(): Promise<ChatGPTUser | null> {
   const requestHeaders = await headers();
+  if (await isOwner(requestHeaders.get("authorization"))) {
+    return {userId: "owner", displayName: "Restaurant owner", email: "", fullName: null};
+  }
+  return null;
+  /*
   const userId = requestHeaders.get(USER_ID_HEADER);
   const email = requestHeaders.get(USER_EMAIL_HEADER);
   if (!userId || !email) return null;
@@ -36,7 +42,7 @@ export async function getChatGPTUser(): Promise<ChatGPTUser | null> {
     displayName: fullName ?? email,
     email,
     fullName,
-  };
+  }; */
 }
 
 export async function requireChatGPTUser(
