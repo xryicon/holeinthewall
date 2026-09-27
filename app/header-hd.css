@@ -1,11 +1,12 @@
 @font-face { font-family: Kalam; font-style: normal; font-weight: 700; font-display: swap; src: url("/fonts/kalam-bold.ttf") format("truetype"); }
 .fixed-menu-backdrop { position: absolute; inset: 0; background-color: #171a18; background-image: url("/images/menu-spread.png"); background-position: center top; background-size: max(100vw, 1200px) auto; background-repeat: repeat-y; pointer-events: none; }
 .mexican-feature-icon { display: block; flex-shrink: 0; height: 96px; background-image: url("/images/mexican-feature-icons.png"); background-repeat: no-repeat; background-size: 288px 96px; }
-.mexican-feature-icon-0 { width: 70px; background-position: 0 0; }
-.mexican-feature-icon-1 { width: 60px; background-position: -72px 0; }
-.mexican-feature-icon-2 { width: 82px; background-position: -132px 0; }
-.mexican-feature-icon-3 { width: 70px; background-position: -216px 0; }
+.mexican-feature-icon-0 { width: 76px; background-position: 0 0; }
+.mexican-feature-icon-1 { width: 62px; background-position: -76px 0; }
+.mexican-feature-icon-2 { width: 84px; background-position: -141px 0; }
+.mexican-feature-icon-3 { width: 54px; background-position: -230px 0; }
 section[aria-label="Our values"] .mexican-benefit { gap: 4px; position: relative; }
+.mexican-benefit > span:last-child { min-height: 34px; display: flex; align-items: center; justify-content: center; }
 .mexican-benefit::after { content: ""; width: 38px; height: 3px; margin-top: 8px; border-radius: 2px; background: #138244; }
 .mexican-benefit-1::after { background: #c8202b; }
 .mexican-benefit-2::after { background: #dc9d17; }
