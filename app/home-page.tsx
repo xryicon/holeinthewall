@@ -74,8 +74,7 @@ export function HomePage() {
   const [menu, setMenu] = useState<MenuItem[]>(defaultMenu);
   const [activeCategory, setActiveCategory] = useState("nachos");
   const [fullMenu, setFullMenu] = useState(false);
-  const pairStart = Math.floor(categories.findIndex((c) => c.id === activeCategory) / 2) * 2;
-  const visibleCategories = fullMenu ? categories : categories.slice(pairStart, pairStart + 2);
+  const visibleCategories = fullMenu ? categories : categories.filter((category) => category.id === activeCategory);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [bookingNotice, setBookingNotice] = useState(false);
   const t = copy[language];
@@ -174,7 +173,7 @@ export function HomePage() {
               </TabsTrigger>
             ))}
           </TabsList>
-          <div className="reference-menu-card">
+          <div className={"reference-menu-card " + (fullMenu ? "" : "single-category-menu")}>
             <div className="reference-menu-columns">
             {visibleCategories.map((category) => (
               <section className="category-section" id={"menu-" + category.id} key={category.id}>

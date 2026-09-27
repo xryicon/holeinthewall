@@ -36,6 +36,9 @@ header.sticky > div { height: 90px; max-width: 1280px; }
 .reference-tabs [data-slot="tabs-trigger"][data-state="active"] { background: #087d43; color: white; }
 .reference-menu-card { background: #f9f6ef; border-radius: 5px; padding: 28px 30px 20px; }
 .reference-menu-columns { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); }
+.single-category-menu .reference-menu-columns { grid-template-columns: 1fr; }
+.single-category-menu .category-dishes { display: grid !important; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 4px 36px; }
+@media(max-width:767px) { .single-category-menu .category-dishes { grid-template-columns: 1fr; } }
 .reference-menu-card .category-section { padding: 0 24px; background: none; border: 0; border-radius: 0; box-shadow: none; }
 .reference-menu-card .category-section:nth-child(even) { border-left: 1px solid #d6d0c5; }
 .reference-menu-card .category-section:nth-child(n+3) { margin-top: 32px; }
