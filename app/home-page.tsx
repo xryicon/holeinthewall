@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import QRCode from "qrcode";
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Clock3,
@@ -22,7 +23,7 @@ import { categories, defaultMenu, formatPrice, type Language, type MenuItem } fr
 const copy = {
   en: {
     nav: ["Home", "Menu", "About", "Location", "Contact"],
-    order: "Order / Takeaway",
+    order: "Book a table",
     headline: "BIG MEXICAN FLAVOUR.",
     subhead: "HIDDEN IN PLAIN SIGHT.",
     intro: "Fresh ingredients. Authentic flavours. Great food, good vibes.",
@@ -45,7 +46,7 @@ const copy = {
   },
   es: {
     nav: ["Inicio", "Menú", "Nosotros", "Ubicación", "Contacto"],
-    order: "Pedir / Para llevar",
+    order: "Reservar mesa",
     headline: "GRAN SABOR MEXICANO.",
     subhead: "A SIMPLE VISTA.",
     intro: "Ingredientes frescos. Sabores auténticos. Buena comida, buen ambiente.",
@@ -78,6 +79,7 @@ export function HomePage() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [qrOpen, setQrOpen] = useState(false);
   const [qrSrc, setQrSrc] = useState("");
+  const [bookingNotice, setBookingNotice] = useState(false);
   const t = copy[language];
 
   useEffect(() => {
@@ -108,14 +110,14 @@ export function HomePage() {
           </a>
           <nav className="hidden items-center gap-9 text-[14px] lg:flex" aria-label="Main navigation">
             {t.nav.map((label, index) => (
-              <a key={label} href={["#home", "#menu", "#about", "#location", "#contact"][index]}>{label}</a>
+              <a key={label} className={index === 0 ? "home-with-sombrero" : undefined} href={["#home", "#menu", "#about", "#location", "#contact"][index]}>{index === 0 && <span className="home-sombrero" aria-hidden="true" />}{label}</a>
             ))}
           </nav>
           <div className="flex items-center gap-2">
             <button className="language-button" onClick={() => setLanguage(language === "en" ? "es" : "en")} aria-label="Switch language">
               <Languages size={17} /> {language === "en" ? "ES" : "EN"}
             </button>
-            <a className="order-button hidden sm:inline-flex" href="tel:+35312345678"><ShoppingBag size={18} />{t.order}</a>
+            <button className="order-button booking-button hidden sm:inline-flex" onClick={() => setBookingNotice(true)}><span aria-hidden="true">✦</span>{t.order}</button>
             <button className="mobile-toggle lg:hidden" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Open navigation">
               {mobileOpen ? <X /> : <MenuIcon />}
             </button>
@@ -123,8 +125,8 @@ export function HomePage() {
         </div>
         {mobileOpen && (
           <nav className="mobile-nav lg:hidden">
-            {t.nav.map((label, index) => <a key={label} onClick={() => setMobileOpen(false)} href={["#home", "#menu", "#about", "#location", "#contact"][index]}>{label}</a>)}
-            <a className="order-button" href="tel:+35312345678">{t.order}</a>
+            {t.nav.map((label, index) => <a key={label} className={index === 0 ? "home-with-sombrero" : undefined} onClick={() => setMobileOpen(false)} href={["#home", "#menu", "#about", "#location", "#contact"][index]}>{index === 0 && <span className="home-sombrero" aria-hidden="true" />}{label}</a>)}
+            <button className="order-button booking-button" onClick={() => { setMobileOpen(false); setBookingNotice(true); }}>{t.order}</button>
           </nav>
         )}
       </header>
@@ -213,10 +215,17 @@ export function HomePage() {
         <div className="mx-auto grid max-w-[1200px] items-center gap-8 px-6 py-10 md:grid-cols-[1fr_2fr_1fr]">
           <div className="brand-stack text-white">HOLE<br />IN THE<br />WALL</div>
           <div className="text-center"><p className="brush-sub text-2xl text-white">Good food brings people together</p><div className="footer-links">{t.nav.map((label, index) => <a key={label} href={["#home", "#menu", "#about", "#location", "#contact"][index]}>{label}</a>)}</div></div>
-          <div className="flex flex-col items-center gap-4 md:items-end"><div className="flex gap-4 text-xl font-black" aria-label="Social media"><span aria-label="Instagram">◎</span><span aria-label="Facebook">f</span></div><a className="order-button" href="tel:+35312345678">{t.order}</a></div>
+          <div className="flex flex-col items-center gap-4 md:items-end"><div className="flex gap-4 text-xl font-black" aria-label="Social media"><span aria-label="Instagram">◎</span><span aria-label="Facebook">f</span></div><button className="order-button booking-button" onClick={() => setBookingNotice(true)}>{t.order}</button></div>
         </div>
         <div className="border-t border-white/10 px-6 py-4 text-center text-xs text-white/55">© 2026 Hole in the Wall · <Link href="/admin" className="hover:text-white">{t.admin}</Link></div>
       </footer>
+      <Dialog open={bookingNotice} onOpenChange={setBookingNotice}>
+        <DialogContent className="booking-notice">
+          <DialogTitle>{t.order}</DialogTitle>
+          <DialogDescription>{language === "en" ? "WhatsApp reservations are coming soon. Online booking is not available yet." : "Las reservas por WhatsApp estarán disponibles pronto. Aún no se puede reservar en línea."}</DialogDescription>
+          <button className="green-button" onClick={() => setBookingNotice(false)}>{t.close}</button>
+        </DialogContent>
+      </Dialog>
 
       {qrOpen && <div className="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="qr-title" onClick={() => setQrOpen(false)}><div className="qr-modal" onClick={(event) => event.stopPropagation()}><button className="modal-close" onClick={() => setQrOpen(false)} aria-label={t.close}><X /></button><h2 id="qr-title" className="brush-heading">{t.qrTitle}</h2><p>{t.qrText}</p>{qrSrc && <img src={qrSrc} alt="QR code for this menu" className="mx-auto mt-5 w-64" />}<button className="green-button mt-5" onClick={() => setQrOpen(false)}>{t.close}</button></div></div>}
     </main>
